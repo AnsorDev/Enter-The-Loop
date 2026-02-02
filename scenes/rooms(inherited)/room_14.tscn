@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://1bq4b2espk0g"]
+
+[ext_resource type="PackedScene" uid="uid://ygjda0g4j8r0" path="res://scenes/general_room_layout.tscn" id="1_3nipq"]
+[ext_resource type="Script" path="res://scripts/room_specific/exit_hole_14.gd" id="2_jc4i3"]
+[ext_resource type="Texture2D" uid="uid://b8oybxhaa76on" path="res://assets/ChatGPT Image Aug 14, 2025, 04_36_28 PM.png" id="2_qg8pu"]
+
+[node name="GeneralRoomLayout" instance=ExtResource("1_3nipq")]
+
+[node name="ExitHole" parent="." index="7"]
+script = ExtResource("2_jc4i3")
+
+[node name="TextureRect" type="TextureRect" parent="." index="11"]
+unique_name_in_owner = true
+visible = false
+z_index = 7
+offset_left = -107.0
+offset_top = -72.0
+offset_right = 293.0
+offset_bottom = 328.0
+texture = ExtResource("2_qg8pu")
+expand_mode = 1

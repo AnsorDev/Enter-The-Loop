@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://b80tgn2xonasp"]
+
+[ext_resource type="PackedScene" uid="uid://ygjda0g4j8r0" path="res://scenes/general_room_layout.tscn" id="1_sesnv"]
+[ext_resource type="Script" path="res://scripts/room_specific/area_2d_information_text.gd" id="2_3fqm3"]
+[ext_resource type="FontFile" uid="uid://cov8rb7itks4n" path="res://assets/Square.ttf" id="3_4evxt"]
+[ext_resource type="AudioStream" uid="uid://d1maqnnb2bq7r" path="res://sounds/Audio/bookFlip2.ogg" id="3_k8idh"]
+[ext_resource type="AudioStream" uid="uid://cmijap1u1d5n5" path="res://sounds/self_made_sounds/untitled.ogg" id="4_jf1jc"]
+[ext_resource type="AudioStream" uid="uid://k3fpwfb2ql0b" path="res://sounds/self_made_sounds/untitled2.ogg" id="5_x8f7l"]
+[ext_resource type="AudioStream" uid="uid://hfpavtyemp3d" path="res://sounds/self_made_sounds/untitled3.ogg" id="6_wn2ym"]
+[ext_resource type="AudioStream" uid="uid://i2royb42ksrd" path="res://sounds/self_made_sounds/untitled4.ogg" id="7_nl0kr"]
+[ext_resource type="AudioStream" uid="uid://db0n1o61i6oek" path="res://sounds/self_made_sounds/untitled5.ogg" id="8_r8epr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3nf6b"]
+radius = 20.3961
+
+[sub_resource type="Gradient" id="Gradient_j6son"]
+colors = PackedColorArray(0.760784, 0.8, 0, 0.431373, 0, 0, 0, 0.254902)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w5x34"]
+gradient = SubResource("Gradient_j6son")
+fill = 1
+fill_from = Vector2(0.504274, 0.5)
+fill_to = Vector2(0.84188, 0.196581)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qnx5c"]
+random_pitch = 1.1
+streams_count = 5
+stream_0/stream = ExtResource("4_jf1jc")
+stream_1/stream = ExtResource("5_x8f7l")
+stream_2/stream = ExtResource("6_wn2ym")
+stream_3/stream = ExtResource("7_nl0kr")
+stream_4/stream = ExtResource("8_r8epr")
+
+[node name="GeneralRoomLayout" instance=ExtResource("1_sesnv")]
+position = Vector2(-1, 0)
+
+[node name="TileMapLayerFG" parent="TileMapLayerForeground" index="0"]
+tile_map_data = PackedByteArray(0, 0, 14, 0, 255, 255, 4, 0, 7, 0, 12, 0, 0, 0)
+
+[node name="ExitHole" parent="." index="7"]
+unique_name_in_owner = true
+
+[node name="Area2DInformationText" type="Area2D" parent="." index="11"]
+position = Vector2(136, 0)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_3fqm3")
+info_text = "[center]You are trapped in a loop.
+Reach the [color=yellow]15th[/color] floor to break free.
+Fail along the way, and the loop resets.
+Escape… [shake rate=20 level=20]or be trapped here forever.
+
+[font_size=40]the floor is slippery "
+duration = 6
+fate_out_duration = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DInformationText" index="0"]
+shape = SubResource("CircleShape2D_3nf6b")
+
+[node name="PointLight2D" type="PointLight2D" parent="Area2DInformationText" index="1"]
+position = Vector2(0, -6)
+scale = Vector2(1.65625, 1.65625)
+texture = SubResource("GradientTexture2D_w5x34")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2DInformationText" index="2"]
+unique_name_in_owner = true
+stream = ExtResource("3_k8idh")
+volume_db = 5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2DInformationText" index="3"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_qnx5c")
+volume_db = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Area2DInformationText" index="4"]
+unique_name_in_owner = true
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = 6.0
+offset_right = 1345.0
+offset_bottom = 356.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/normal_font = ExtResource("3_4evxt")
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[center]You are trapped in a loop.
+Reach the [color=yellow]15th[/color] floor to break free.
+Fail along the way, and the loop resets.
+Escape… [shake rate=20 level=20]or be trapped here forever.[/shake]
+
+[font_size=40]the floor is slippery "
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+visible_characters_behavior = 1

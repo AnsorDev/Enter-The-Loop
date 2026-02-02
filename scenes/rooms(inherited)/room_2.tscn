@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://i2leq50ecvdu"]
+
+[ext_resource type="PackedScene" uid="uid://ygjda0g4j8r0" path="res://scenes/general_room_layout.tscn" id="1_01dks"]
+[ext_resource type="Script" path="res://scripts/room_specific/exit_hole_2.gd" id="2_l1muk"]
+
+[node name="GeneralRoomLayout" instance=ExtResource("1_01dks")]
+
+[node name="ExitHole" parent="." index="7"]
+script = ExtResource("2_l1muk")
